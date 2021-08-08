@@ -65,4 +65,12 @@
     (func $withoutCrown (param $piece i32) (result i32)
         (i32.and (get_local $piece) (i32.const 3)) 
     )
+
+    (export "indexForPosition" (func $indexForPosition))
+    (export "offsetForPosition" (func $offsetForPosition))
+    (export "isCrowned" (func $isCrowned))
+    (export "isWhite" (func $isWhite))
+    (export "isBlack" (func $isBlack))
+    (export "withCrown" (func $withCrown))
+    (export "withoutCrown" (func $withoutCrown))
 )
