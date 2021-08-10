@@ -119,4 +119,9 @@
         )
     )
 
+    ;; Gets the color (white or black) that owns current turn
+    (func $getTurnOwner (result i32)
+        (get_global $currentTurn)
+    )
+
 )
