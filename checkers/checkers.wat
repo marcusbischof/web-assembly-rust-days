@@ -5,6 +5,8 @@
     (global $BLACK i32 (i32.const 1))
     (global $CROWN i32 (i32.const 4))
 
+    ;; Ideally this should be set to 1 or 2, 0 indicates
+    ;; that turn owner hasn't been set. 
     (global $currentTurn (mut i32) (i32.const 0))
 
     ;; Get the index for x and y, given that we have to access values at (x,y)
@@ -124,4 +126,25 @@
         (get_global $currentTurn)
     )
 
+    ;; Sets the turn owner
+    (func $setTurnOwner (param $turnOwner i32)
+        (set_global $currentTurn (get_local $turnOwner))
+    )
+
+    ;; At the end of a turn, switch turn owner to the other player
+    (func $toggleTurnOwner
+        (if (i32.eq) (call $getTurnOwner) (i32.const 1)
+            (then (call $setTurnOwner (i32.const 2)))
+            (else (call $setTurnOwner (i32.const 1)))
+        )
+    )
+
+    ;; Determine if it is a player's turn
+    (func $isPlayersTurn (param $piece i32) (result i32)
+        ;; Using i32.eq instead of the convoluted in-book recommendation
+        (i32.eq
+            (get_local $piece)        
+            (call $getTurnOwner)
+        )
+    )
 )
