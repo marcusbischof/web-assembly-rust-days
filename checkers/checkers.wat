@@ -141,10 +141,11 @@
 
     ;; Determine if it is a player's turn
     (func $isPlayersTurn (param $piece i32) (result i32)
-        ;; Using i32.eq instead of the convoluted in-book recommendation
-        (i32.eq
-            (get_local $piece)        
-            (call $getTurnOwner)
+        ;; We don't use i32.eq because that wouldn't correctly
+        ;; deal with scenario where white or black piece is crowned.
+        (i32.gt_s
+            (i32.and (get_local $piece) (all $getTurnOwner))
+            (i32.const 0)
         )
     )
 )
