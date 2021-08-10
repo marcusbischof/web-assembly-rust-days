@@ -5,6 +5,8 @@
     (global $BLACK i32 (i32.const 1))
     (global $CROWN i32 (i32.const 4))
 
+    (global $currentTurn (mut i32) (i32.const 0))
+
     ;; Get the index for x and y, given that we have to access values at (x,y)
     ;; in a contiguous block of memory as opposed to the usual (matrix-esque).
     (func $indexForPosition (param $x i32) (param $y i32) (result i32)
